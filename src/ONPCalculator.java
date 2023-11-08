@@ -18,7 +18,7 @@ public class ONPCalculator {
                     onpExpr.append(opStack.pop()).append(" ");
                 }
                 opStack.pop(); // usuwamy znak  '(' ze stosu
-            }else if(token ==' '||token=='='){}else  {
+            }else if(token ==' '){}else if(token=='='){break;}else   {
                 // operatory
                 while (!opStack.isEmpty()&&operatorPiority(token)<=operatorPiority(opStack.peek())){ // jeśli operatory ze stosu mają mniejszy lub równy priorytet o obecnego to przesuwamy jes z góry stosu
                     onpExpr.append(opStack.pop()).append(" ");

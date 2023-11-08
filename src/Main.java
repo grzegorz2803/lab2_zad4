@@ -1,8 +1,25 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.concurrent.*;
+
 public class Main {
+
     public static void main(String[] args) {
-        ONPCalculator onp = new ONPCalculator();
-        String expr = "2 * 3 - (18 - 4) / 2 + 2^3=";
-        int result =onp.ONPResult(expr);
-        System.out.println("Wynik = "+result);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))) {
+            String line;
+            while ((line=reader.readLine())!=null)
+          {
+              Callable<Integer> task = new ReadLineFromFile(line);
+              MyFutureTask mytask = new MyFutureTask(task);
+              executorService.submit(mytask);
+          }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            executorService.shutdown();
+
+        }
     }
 }
