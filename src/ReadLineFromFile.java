@@ -10,8 +10,8 @@ public class ReadLineFromFile implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() {
-
+    public Integer call() throws InterruptedException {
+        Thread.sleep(100);
         return onp.ONPResult(line);
     }
 }
